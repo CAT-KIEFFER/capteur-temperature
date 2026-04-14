@@ -1,19 +1,36 @@
 fichier = open("data.txt", "r")
 
-compteur_low = 0
-compteur_warning = 0
-total = 0
+liste_temp = []
 
 for ligne in fichier:
-    total += 1
 
-    if "LOW TEMP" in ligne:
-        compteur_low += 1
-    if "WARNING" in ligne:
-        compteur_warning += 1
+    position = ligne.find("Temp:")
+
+    if position != -1:
+        position = position + 5
+
+        while ligne[position] == " ":
+            position += 1
+
+        nombre = ""
+
+        while ligne[position].isdigit():
+            nombre += ligne[position]
+            position += 1
+
+        temp = int(nombre)
+
+        liste_temp.append(temp)
 
 fichier.close()
 
-print("total des relevés: ", total)
-print("total low: ", compteur_low)
-print("total warning: ", compteur_warning)
+min_temp = min(liste_temp)
+max_temp = max(liste_temp)
+moyenne = sum(liste_temp) / len(liste_temp)
+
+print("min:", min_temp)
+print("max:", max_temp)
+print("moyenne:", moyenne)
+print("total:", len(liste_temp))
+
+
