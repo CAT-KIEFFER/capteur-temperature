@@ -1,11 +1,13 @@
 fichier = open("data.txt", "r")
 
+liste_temp = []
+
 for ligne in fichier:
 
     position = ligne.find("Temp")
 
     if position == -1:
-        print("pas trouver")
+        print("pas trouvé")
     else:
         position = position + 5
 
@@ -22,6 +24,10 @@ for ligne in fichier:
             print("pas de valeur")
         else:
             temp = int(nombre)
-            print("temp:", temp)
+            liste_temp.append(temp)
 
 fichier.close()
+
+print("min:", min(liste_temp))
+print("max:", max(liste_temp))
+print("moyenne:", sum(liste_temp) / len(liste_temp))
